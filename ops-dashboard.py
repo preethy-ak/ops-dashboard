@@ -1811,6 +1811,15 @@ def apply_filters(conv_df: pd.DataFrame, today_ts: pd.Timestamp) -> pd.DataFrame
     st.sidebar.markdown(f"**{total:,}** of **{len(src):,}** conversations")
     if total == 0:
         st.sidebar.warning("No results — try widening the date range or clearing filters.")
+
+    # ── Cache / reload controls ───────────────────────────────────────────────
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### ⚙️ Controls")
+    if st.sidebar.button("🔄 Clear Cache & Reload", use_container_width=True,
+                          help="Clears all cached data. Use when uploading a new file or if the app seems stuck."):
+        st.cache_data.clear()
+        st.rerun()
+
     return result
 
 
